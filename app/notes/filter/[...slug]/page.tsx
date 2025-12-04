@@ -1,3 +1,3 @@
 export default function foo() {
-  return <h2>Вибери нотатки або тег</h2>;
+  return <h2>Вибери або тег</h2>;
 }
