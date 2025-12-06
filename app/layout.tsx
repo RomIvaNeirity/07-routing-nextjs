@@ -23,10 +23,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  notepreviev,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
-  notepreviev: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   return (
     <html lang="en">
@@ -35,7 +35,7 @@ export default function RootLayout({
           <Header />
           <main>
             {children}
-            {notepreviev}
+            {modal}
           </main>
           <Footer />
         </TanStackProvider>
