@@ -1,4 +1,4 @@
-// app/notes/layout.tsx
+// app/notes/filter/layout.tsx
 
 import css from "./LayoutNotes.module.css";
 

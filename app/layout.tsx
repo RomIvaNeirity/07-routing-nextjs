@@ -23,15 +23,20 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  notepreviev,
 }: Readonly<{
   children: React.ReactNode;
+  notepreviev: React.ReactNode;
 }>) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <TanStackProvider>
           <Header />
-          {children}
+          <main>
+            {children}
+            {notepreviev}
+          </main>
           <Footer />
         </TanStackProvider>
       </body>

@@ -1,3 +1,5 @@
+// lib/api.ts
+
 import axios from "axios";
 import type { Note, NoteFormValues } from "@/types/note";
 
@@ -65,4 +67,26 @@ export async function fetchNoteById(id: string): Promise<Note> {
     }
   );
   return response.data;
+}
+
+export async function getNotesByTags(
+  tag: string | undefined
+): Promise<FetchNotesResponse> {
+  const response = await axios.get(
+    `https://notehub-public.goit.study/api/notes`,
+    {
+      params: { tag },
+
+      headers: {
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
+      },
+    }
+  );
+
+  console.log(response);
+  console.log("QUERY:", tag);
+  return {
+    notes: response.data.notes ?? response.data,
+    totalPages: response.data.totalPages ?? 1,
+  };
 }
