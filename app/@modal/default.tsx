@@ -1,5 +1,5 @@
-//
+// app/@modal/default.tsx
 
-export default function DefaultNotePreviev() {
+export default function DefaultModalSlot() {
   return null;
 }

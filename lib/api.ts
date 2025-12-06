@@ -10,7 +10,8 @@ interface FetchNotesResponse {
 
 export async function fetchNotes(
   page: number = 1,
-  search: string = ""
+  search: string = "",
+  tag: string | undefined
 ): Promise<FetchNotesResponse> {
   const response = await axios.get<FetchNotesResponse>(
     "https://notehub-public.goit.study/api/notes",
@@ -19,13 +20,14 @@ export async function fetchNotes(
         page,
         perPage: 10,
         search: search || undefined,
+        tag,
       },
       headers: {
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
       },
     }
   );
-  console.log("DATA:", response.data);
+
   return response.data;
 }
 
@@ -67,26 +69,4 @@ export async function fetchNoteById(id: string): Promise<Note> {
     }
   );
   return response.data;
-}
-
-export async function getNotesByTags(
-  tag: string | undefined
-): Promise<FetchNotesResponse> {
-  const response = await axios.get(
-    `https://notehub-public.goit.study/api/notes`,
-    {
-      params: { tag },
-
-      headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
-      },
-    }
-  );
-
-  console.log(response);
-  console.log("QUERY:", tag);
-  return {
-    notes: response.data.notes ?? response.data,
-    totalPages: response.data.totalPages ?? 1,
-  };
 }
