@@ -10,7 +10,7 @@ import { useParams } from "next/navigation";
 
 export default function NotePreviewClient() {
   const { id } = useParams();
-  const { data } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ["note", id],
     queryFn: () => fetchNoteById(id as string),
     refetchOnMount: false,
@@ -22,18 +22,22 @@ export default function NotePreviewClient() {
 
   return (
     <>
-      <Modal onClose={close}>
-        <div className={css.container}>
-          <div className={css.item}>
-            <h2>{data.title}</h2>
-            <p className={css.content}>{data.content}</p>
-            <p className={css.date}>Created date: {data.createdAt}</p>
-            <p className={css.tag}>{data.tag}</p>
-          </div>
+      {isError && <p>Something went wrong.</p>}
+      {isLoading && <p>Loading, please wait...</p>}
+      {data && (
+        <Modal onClose={close}>
+          <div className={css.container}>
+            <div className={css.item}>
+              <h2>{data.title}</h2>
+              <p className={css.content}>{data.content}</p>
+              <p className={css.date}>Created date: {data.createdAt}</p>
+              <p className={css.tag}>{data.tag}</p>
+            </div>
 
-          <button onClick={close}>Close</button>
-        </div>
-      </Modal>
+            <button onClick={close}>Close</button>
+          </div>
+        </Modal>
+      )}
     </>
   );
 }
