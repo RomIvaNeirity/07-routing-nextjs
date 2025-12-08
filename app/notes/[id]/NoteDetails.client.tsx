@@ -9,13 +9,18 @@ import { fetchNoteById } from "@/lib/api";
 export default function NoteDetailsClient() {
   const { id } = useParams();
 
-  const { data } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ["note", id],
     queryFn: () => fetchNoteById(id as string),
     refetchOnMount: false,
   });
 
+  {
+    isLoading && <p>Note details loading, please wait...</p>;
+    isError && <p>Something went wrong.</p>;
+  }
   if (!data) return null;
+
   return (
     <>
       <div className={css.container}>

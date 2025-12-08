@@ -1,7 +1,7 @@
 // app/@modal/(.)notes/[id]/page.tsx
 
 import NotePreviewClient from "./NotePreview.client";
-import { fetchNotes } from "@/lib/api";
+import { fetchNoteById } from "@/lib/api";
 
 import {
   HydrationBoundary,
@@ -18,8 +18,8 @@ async function NotePreview({ params }: Props) {
 
   const { id } = await params;
   await queryClient.prefetchQuery({
-    queryKey: ["notes", id],
-    queryFn: () => fetchNotes(1, "", id),
+    queryKey: ["note", id],
+    queryFn: () => fetchNoteById(id),
   });
 
   return (

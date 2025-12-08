@@ -1,3 +1,5 @@
+//app/loadaing
+
 export default function Loading() {
-  return <p>Loading, please wait...</p>;
+  return null;
 }

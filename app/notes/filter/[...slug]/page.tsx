@@ -10,7 +10,7 @@ import {
 } from "@tanstack/react-query";
 
 type Props = {
-  params: Promise<{ slug: string[]; tag: string | undefined }>;
+  params: Promise<{ slug: string[] }>;
 };
 
 export default async function NotesByTags({ params }: Props) {
